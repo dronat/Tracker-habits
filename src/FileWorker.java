@@ -8,9 +8,7 @@ public class FileWorker {
         File dirCheck = new File("C:/ProgramData/Tracker Habits");
         boolean dirBool = dirCheck.isDirectory();
         if (dirBool) {
-            //System.out.println("Directory exist");
         } else {
-            //System.out.println("Directory not exist");
             DirectoryCreator();
         }
     }
@@ -20,7 +18,6 @@ public class FileWorker {
         File dir = new File("C:/ProgramData/Tracker Habits");
         boolean created = dir.mkdir();
         if (created) {
-            //System.out.println("Created new directory");
         } else {
             System.out.println("\nDirectory create error");
         }
@@ -66,7 +63,7 @@ public class FileWorker {
             System.out.println("FileReader ERROR 'Binary.txt'");
         }
         try {
-            File file = new File("C:\\ProgramData\\Tracker Habits\\CompletedDays.txt");
+            File file = new File("C:\\ProgramData\\Tracker Habits\\CompleteDays.txt");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
             String ReadText;
             int n1 = 0;
@@ -105,7 +102,6 @@ public class FileWorker {
             boolean CompleteFileCreated = CompleteDaysFile.createNewFile();
             boolean MissedFileCreated = MissedDaysFile.createNewFile();
             if(HabitFileCreated && CompleteFileCreated && MissedFileCreated) {
-                //System.out.println("File's has been created");
             }
         } catch (IOException ex) {
             System.out.println("\nFile creation error");
@@ -157,6 +153,7 @@ public class FileWorker {
             File file = new File("C:\\ProgramData\\Tracker Habits\\HabitsList.txt");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
             if (bufferedReader.readLine() != null) {
+                x++;
                 General.IsFileEmpty = false;
                 while (bufferedReader.readLine() != null) {
                     x++;
