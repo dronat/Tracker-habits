@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class FileWorker {
 
@@ -54,7 +54,8 @@ public class FileWorker {
             String ReadText;
             int n1 = 0;
             while ((ReadText = bufferedReader.readLine()) != null) {
-                General.HabitList[n1][0] = ReadText;
+                General.HabitList.add(new ArrayList<>());
+                General.HabitList.get(n1).add(ReadText);
                 n1++;
             }
             bufferedReader.close();
@@ -68,7 +69,7 @@ public class FileWorker {
             String ReadText;
             int n1 = 0;
             while ((ReadText = bufferedReader.readLine()) != null) {
-                General.HabitList[n1][1] = ReadText;
+                General.HabitList.get(n1).add(ReadText);
                 n1++;
             }
             bufferedReader.close();
@@ -82,7 +83,7 @@ public class FileWorker {
             String ReadText;
             int n1 = 0;
             while ((ReadText = bufferedReader.readLine()) != null) {
-                General.HabitList[n1][2] = ReadText;
+                General.HabitList.get(n1).add(ReadText);
                 n1++;
             }
             bufferedReader.close();
@@ -119,10 +120,10 @@ public class FileWorker {
             BufferedWriter bwCompleteDaysFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(CompleteDaysFile), "UTF8"));
             BufferedWriter bwMissedDaysFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(MissedDaysFile), "UTF8"));
             int WriteString = 0;
-            while (WriteString < General.ArrayLineNumber) {
-                bwHabitListFile.write(General.HabitList[WriteString][0]);
-                bwCompleteDaysFile.write(General.HabitList[WriteString][1]);
-                bwMissedDaysFile.write(General.HabitList[WriteString][2]);
+            while (WriteString < General.HabitList.size()) {
+                bwHabitListFile.write(General.HabitList.get(WriteString).get(0));
+                bwCompleteDaysFile.write(General.HabitList.get(WriteString).get(1));
+                bwMissedDaysFile.write(General.HabitList.get(WriteString).get(2));
                 bwHabitListFile.newLine();
                 bwCompleteDaysFile.newLine();
                 bwMissedDaysFile.newLine();
@@ -145,19 +146,14 @@ public class FileWorker {
     }
 
 
-    public static int ArraySizeCalculation() {
-        int x = 0;
+    public static void IsFileEmpty() {
         try {
             FileWorker.DirectoryStartChecker();
             FileWorker.FileExistStartCheck();
             File file = new File("C:\\ProgramData\\Tracker Habits\\HabitsList.txt");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
             if (bufferedReader.readLine() != null) {
-                x++;
                 General.IsFileEmpty = false;
-                while (bufferedReader.readLine() != null) {
-                    x++;
-                }
             } else {
                 General.IsFileEmpty = true;
             }
@@ -167,7 +163,7 @@ public class FileWorker {
             e.printStackTrace();
             System.out.println("ArraySizeCalculation() ERROR");
         }
-        return x;
+
     }
 
 
@@ -175,11 +171,10 @@ public class FileWorker {
         System.out.println("Здравствуйте Екатерина!\nУ вас ещё нет ни одной привычки, давайте исправим это! \nКак хотите назвать первую привычку?");
         Scanner scan1 = new Scanner(System.in);
         String scanResult = scan1.nextLine();
-        General.HabitList = new String [1][3];
-        General.HabitList [0][0] = scanResult;
-        General.HabitList [0][1] = "0";
-        General.HabitList [0][2] = "0";
-        General.ArrayLineNumber++;
+        General.HabitList.add(new ArrayList<>());
+        General.HabitList.get(0).add(scanResult);
+        General.HabitList.get(0).add("0");
+        General.HabitList.get(0).add("0");
         FileWriter();
     }
 }
