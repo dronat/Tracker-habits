@@ -4,7 +4,7 @@ import java.util.*;
 public class FileWorker {
 
 
-    public static void DirectoryStartChecker() {
+    public static void DirectoryStartChecker() { // Complete
         File dirCheck = new File("C:/ProgramData/Tracker Habits");
         boolean dirBool = dirCheck.isDirectory();
         if (dirBool) {
@@ -14,7 +14,7 @@ public class FileWorker {
     }
 
 
-    public static void DirectoryCreator() {
+    public static void DirectoryCreator() { // Complete
         File dir = new File("C:/ProgramData/Tracker Habits");
         boolean created = dir.mkdir();
         if (created) {
@@ -24,7 +24,7 @@ public class FileWorker {
     }
 
 
-    public static void FileExistStartCheck() {
+    public static void FileExistStartCheck() { // Complete
         File HabitListFile = new File("C:/ProgramData/Tracker Habits", "HabitsList.txt");
         File CompleteDaysFile = new File("C:/ProgramData/Tracker Habits", "CompleteDays.txt");
         File MissedDaysFile = new File("C:/ProgramData/Tracker Habits", "MissedDays.txt");
@@ -47,7 +47,7 @@ public class FileWorker {
     }
 
 
-    public static void FileReader() {
+    public static void FileReader() { // Complete
         try {
             File file = new File("C:\\ProgramData\\Tracker Habits\\HabitsList.txt");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
@@ -94,7 +94,7 @@ public class FileWorker {
     }
 
 
-    public static void FileCreator() {
+    public static void FileCreator() { // Complete
         File HabitListFile = new File("C:/ProgramData/Tracker Habits","HabitsList.txt");
         File CompleteDaysFile = new File("C:/ProgramData/Tracker Habits","CompleteDays.txt");
         File MissedDaysFile = new File("C:/ProgramData/Tracker Habits","MissedDays.txt");
@@ -111,7 +111,7 @@ public class FileWorker {
 
 
 
-    public static void FileWriter() {
+    public static void FileWriter() { // Complete
         try {
             File HabitListFile = new File("C:/ProgramData/Tracker Habits", "HabitsList.txt");
             File CompleteDaysFile = new File("C:/ProgramData/Tracker Habits", "CompleteDays.txt");
@@ -146,7 +146,7 @@ public class FileWorker {
     }
 
 
-    public static void IsFileEmpty() {
+    public static void IsFileEmpty() { // Complete
         try {
             FileWorker.DirectoryStartChecker();
             FileWorker.FileExistStartCheck();
@@ -167,7 +167,7 @@ public class FileWorker {
     }
 
 
-    public static void CreatingTheFirstHabit() {
+    public static void CreatingTheFirstHabit() { // Complete
         System.out.println("Здравствуйте Екатерина!\nУ вас ещё нет ни одной привычки, давайте исправим это! \nКак хотите назвать первую привычку?");
         Scanner scan1 = new Scanner(System.in);
         String scanResult = scan1.nextLine();
