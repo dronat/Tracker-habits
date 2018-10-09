@@ -28,26 +28,45 @@ public class FileWorker {
         File HabitListFile = new File("C:/ProgramData/Tracker Habits", "HabitsList.txt");
         File CompleteDaysFile = new File("C:/ProgramData/Tracker Habits", "CompleteDays.txt");
         File MissedDaysFile = new File("C:/ProgramData/Tracker Habits", "MissedDays.txt");
+        File ArchiveHabitListFile = new File("C:/ProgramData/Tracker Habits", "ArchiveHabitsList.txt");
+        File ArchiveCompleteDaysFile = new File("C:/ProgramData/Tracker Habits", "ArchiveCompleteDays.txt");
+        File ArchiveMissedDaysFile = new File("C:/ProgramData/Tracker Habits", "ArchiveMissedDays.txt");
         boolean HabitExist = HabitListFile.exists();
         boolean CompleteExist = CompleteDaysFile.exists();
         boolean MissedExist = MissedDaysFile.exists();
-        if (HabitExist) {
-            if (CompleteExist) {
-                if (MissedExist) {
-                    //System.out.println("Files successfully created");
-                } else {
-                    FileCreator();
-                }
-            } else {
-                FileCreator();
-            }
+        boolean ArchiveHabitExist = ArchiveHabitListFile.exists();
+        boolean ArchiveCompleteExist = ArchiveCompleteDaysFile.exists();
+        boolean ArchiveMissedExist = ArchiveMissedDaysFile.exists();
+        if (HabitExist && CompleteExist && MissedExist && ArchiveHabitExist && ArchiveCompleteExist && ArchiveMissedExist) {
         } else {
             FileCreator();
         }
     }
 
 
-    public static void FileReader() { // Complete
+    public static void FileCreator() { // Complete
+        File HabitListFile = new File("C:/ProgramData/Tracker Habits","HabitsList.txt");
+        File CompleteDaysFile = new File("C:/ProgramData/Tracker Habits","CompleteDays.txt");
+        File MissedDaysFile = new File("C:/ProgramData/Tracker Habits","MissedDays.txt");
+        File ArchiveHabitListFile = new File("C:/ProgramData/Tracker Habits", "ArchiveHabitsList.txt");
+        File ArchiveCompleteDaysFile = new File("C:/ProgramData/Tracker Habits", "ArchiveCompleteDays.txt");
+        File ArchiveMissedDaysFile = new File("C:/ProgramData/Tracker Habits", "ArchiveMissedDays.txt");
+        try {
+            boolean HabitFileCreated = HabitListFile.createNewFile();
+            boolean CompleteFileCreated = CompleteDaysFile.createNewFile();
+            boolean MissedFileCreated = MissedDaysFile.createNewFile();
+            boolean ArchiveHabitCreated = ArchiveHabitListFile.createNewFile();
+            boolean ArchiveCompleteCreated = ArchiveCompleteDaysFile.createNewFile();
+            boolean ArchiveMissedCreated = ArchiveMissedDaysFile.createNewFile();
+            if(HabitFileCreated && CompleteFileCreated && MissedFileCreated && ArchiveHabitCreated && ArchiveCompleteCreated && ArchiveMissedCreated) {
+            }
+        } catch (IOException ex) {
+            System.out.println("\nFile creation error");
+        }
+    }
+
+
+    public static void ReadAllOfTheFiles() { // Complete
         try {
             File file = new File("C:\\ProgramData\\Tracker Habits\\HabitsList.txt");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
@@ -61,7 +80,7 @@ public class FileWorker {
             bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("FileReader ERROR 'Binary.txt'");
+            System.out.println("FileReader ERROR 'HabitList.txt'");
         }
         try {
             File file = new File("C:\\ProgramData\\Tracker Habits\\CompleteDays.txt");
@@ -91,48 +110,92 @@ public class FileWorker {
             e.printStackTrace();
             System.out.println("FileReader ERROR 'MissedDays.txt'");
         }
-    }
-
-
-    public static void FileCreator() { // Complete
-        File HabitListFile = new File("C:/ProgramData/Tracker Habits","HabitsList.txt");
-        File CompleteDaysFile = new File("C:/ProgramData/Tracker Habits","CompleteDays.txt");
-        File MissedDaysFile = new File("C:/ProgramData/Tracker Habits","MissedDays.txt");
         try {
-            boolean HabitFileCreated = HabitListFile.createNewFile();
-            boolean CompleteFileCreated = CompleteDaysFile.createNewFile();
-            boolean MissedFileCreated = MissedDaysFile.createNewFile();
-            if(HabitFileCreated && CompleteFileCreated && MissedFileCreated) {
+            File file = new File("C:\\ProgramData\\Tracker Habits\\ArchiveHabitsList.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
+            String ReadText;
+            int n1 = 0;
+            while ((ReadText = bufferedReader.readLine()) != null) {
+                General.ArchiveHabitList.add(new ArrayList<>());
+                General.ArchiveHabitList.get(n1).add(ReadText);
+                n1++;
             }
-        } catch (IOException ex) {
-            System.out.println("\nFile creation error");
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("FileReader ERROR 'ArchiveHabitList.txt'");
+        }
+        try {
+            File file = new File("C:\\ProgramData\\Tracker Habits\\ArchiveCompleteDays.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
+            String ReadText;
+            int n1 = 0;
+            while ((ReadText = bufferedReader.readLine()) != null) {
+                General.ArchiveHabitList.get(n1).add(ReadText);
+                n1++;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("FileReader ERROR 'ArchiveCompletedDays.txt'");
+        }
+        try {
+            File file = new File("C:\\ProgramData\\Tracker Habits\\ArchiveMissedDays.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
+            String ReadText;
+            int n1 = 0;
+            while ((ReadText = bufferedReader.readLine()) != null) {
+                General.ArchiveHabitList.get(n1).add(ReadText);
+                n1++;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("FileReader ERROR 'ArchiveMissedDays.txt'");
         }
     }
 
 
-
-    public static void FileWriter() { // Complete
+    public static void SaveAllInFiles() { // Complete
         try {
             File HabitListFile = new File("C:/ProgramData/Tracker Habits", "HabitsList.txt");
             File CompleteDaysFile = new File("C:/ProgramData/Tracker Habits", "CompleteDays.txt");
             File MissedDaysFile = new File("C:/ProgramData/Tracker Habits", "MissedDays.txt");
+            File ArchiveHabitListFile = new File("C:/ProgramData/Tracker Habits", "ArchiveHabitsList.txt");
+            File ArchiveCompleteDaysFile = new File("C:/ProgramData/Tracker Habits", "ArchiveCompleteDays.txt");
+            File ArchiveMissedDaysFile = new File("C:/ProgramData/Tracker Habits", "ArchiveMissedDays.txt");
             BufferedWriter bwHabitListFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(HabitListFile), "UTF8"));
             BufferedWriter bwCompleteDaysFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(CompleteDaysFile), "UTF8"));
             BufferedWriter bwMissedDaysFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(MissedDaysFile), "UTF8"));
-            int WriteString = 0;
-            while (WriteString < General.HabitList.size()) {
-                bwHabitListFile.write(General.HabitList.get(WriteString).get(0));
-                bwCompleteDaysFile.write(General.HabitList.get(WriteString).get(1));
-                bwMissedDaysFile.write(General.HabitList.get(WriteString).get(2));
+            BufferedWriter bwArchiveHabitListFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ArchiveHabitListFile), "UTF8"));
+            BufferedWriter bwArchiveCompleteDaysFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ArchiveCompleteDaysFile), "UTF8"));
+            BufferedWriter bwArchiveMissedDaysFile = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ArchiveMissedDaysFile), "UTF8"));
+            int HabitWriteString = 0;
+            while (HabitWriteString < General.HabitList.size()) {
+                bwHabitListFile.write(General.HabitList.get(HabitWriteString).get(0));
+                bwCompleteDaysFile.write(General.HabitList.get(HabitWriteString).get(1));
+                bwMissedDaysFile.write(General.HabitList.get(HabitWriteString).get(2));
                 bwHabitListFile.newLine();
                 bwCompleteDaysFile.newLine();
                 bwMissedDaysFile.newLine();
                 bwHabitListFile.flush();
                 bwCompleteDaysFile.flush();
                 bwMissedDaysFile.flush();
-                WriteString++;
+                HabitWriteString++;
             }
-
+            int ArchiveHabitWriteString = 0;
+            while (ArchiveHabitWriteString < General.ArchiveHabitList.size()) {
+                bwArchiveHabitListFile.write(General.ArchiveHabitList.get(ArchiveHabitWriteString).get(0));
+                bwArchiveCompleteDaysFile.write(General.ArchiveHabitList.get(ArchiveHabitWriteString).get(1));
+                bwArchiveMissedDaysFile.write(General.ArchiveHabitList.get(ArchiveHabitWriteString).get(2));
+                bwArchiveHabitListFile.newLine();
+                bwArchiveCompleteDaysFile.newLine();
+                bwArchiveMissedDaysFile.newLine();
+                bwArchiveHabitListFile.flush();
+                bwArchiveCompleteDaysFile.flush();
+                bwArchiveMissedDaysFile.flush();
+                ArchiveHabitWriteString++;
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("File not found Error");
@@ -146,16 +209,37 @@ public class FileWorker {
     }
 
 
-    public static void IsFileEmpty() { // Complete
+    public static void IsHabitListFileEmpty() { // Complete
         try {
             FileWorker.DirectoryStartChecker();
             FileWorker.FileExistStartCheck();
             File file = new File("C:\\ProgramData\\Tracker Habits\\HabitsList.txt");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
-            if (bufferedReader.readLine() != null) {
-                General.IsFileEmpty = false;
+            if (bufferedReader.readLine() == null) {
+                General.IsHabitListFileEmpty = true;
             } else {
-                General.IsFileEmpty = true;
+                General.IsHabitListFileEmpty = false;
+            }
+            bufferedReader.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("IsHabitListFileEmpty() ERROR");
+        }
+
+    }
+
+
+    public static void IsArchiveHabittListFileEmpty() { // Complete
+        try {
+            FileWorker.DirectoryStartChecker();
+            FileWorker.FileExistStartCheck();
+            File file = new File("C:\\ProgramData\\Tracker Habits\\ArchiveHabitsList.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
+            if (bufferedReader.readLine() == null) {
+                General.IsArchiveHabitListFileEmpty = true;
+            } else {
+                General.IsArchiveHabitListFileEmpty = false;
             }
             bufferedReader.close();
         }
@@ -175,7 +259,7 @@ public class FileWorker {
         General.HabitList.get(0).add(scanResult);
         General.HabitList.get(0).add("0");
         General.HabitList.get(0).add("0");
-        FileWriter();
+        SaveAllInFiles();
     }
 }
 
