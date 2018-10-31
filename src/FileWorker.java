@@ -98,6 +98,7 @@ public class FileWorker {
             e.printStackTrace();
             System.out.println("FileReader ERROR 'CompletedDays.txt'");
         }
+
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(MissedDaysFile), "UTF8"));
             String ReadText;
@@ -311,18 +312,19 @@ public class FileWorker {
 
 
     public static void MissedDaysChecker() {
-        System.out.println(General.HabitList.get(0).get(2));
         for (int i1 = 0; i1 < General.HabitList.size(); i1++) {
             int missedDays = 0;
             int OldDate = Integer.parseInt(General.HabitList.get(i1).get(4));
             if (OldDate < General.NewDate){
                 missedDays = (General.NewDate - 1) - OldDate;
+                General.HabitList.get(i1).set(2, Integer.toString(missedDays));
+                General.HabitList.get(i1).set(4, Integer.toString(General.NewDate));
             } else if (OldDate > General.NewDate) {
                 missedDays = (365 - OldDate) + (General.NewDate - 1);
+                General.HabitList.get(i1).set(2, Integer.toString(missedDays));
+                General.HabitList.get(i1).set(4, Integer.toString(General.NewDate));
             } else if (OldDate == General.NewDate) {
             }
-            General.HabitList.get(i1).set(2, Integer.toString(missedDays));
-            General.HabitList.get(i1).set(4, Integer.toString(General.NewDate));
             SaveAllInFiles();
         }
     }

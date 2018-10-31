@@ -9,12 +9,14 @@ public class General {
 
 
     public static void main (String[] agrs){
+
         NewDate = calendar.get(Calendar.DAY_OF_YEAR);
         FileWorker.IsHabitListFileEmpty();
         FileWorker.IsArchiveHabitListFileEmpty();
         if (IsHabitListFileEmpty) {
             FileWorker.CreatingTheFirstHabit();
         } else {
+
             FileWorker.ReadAllOfTheFiles();
         }
         FileWorker.MissedDaysChecker();
