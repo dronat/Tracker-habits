@@ -4,22 +4,21 @@ public class General {
     public static ArrayList<ArrayList<String>> HabitList = new ArrayList<>();
     public static ArrayList<ArrayList<String>> ArchiveHabitList = new ArrayList<>();
     public static boolean IsHabitListFileEmpty,IsArchiveHabitListFileEmpty;
-    public static int NewDate;
-    public static Calendar calendar = new GregorianCalendar();
-
 
     public static void main (String[] agrs){
+<<<<<<< HEAD
 
         NewDate = calendar.get(Calendar.DAY_OF_YEAR);
+=======
+>>>>>>> parent of 5fa0440... Добавлен функционал
         FileWorker.IsHabitListFileEmpty();
-        FileWorker.IsArchiveHabitListFileEmpty();
+        FileWorker.IsArchiveHabittListFileEmpty();
         if (IsHabitListFileEmpty) {
             FileWorker.CreatingTheFirstHabit();
         } else {
 
             FileWorker.ReadAllOfTheFiles();
         }
-        FileWorker.MissedDaysChecker();
         StarMenu();
     }
 
@@ -115,11 +114,6 @@ public class General {
         HabitList.get(HabitListSize).add(InputTXT);
         HabitList.get(HabitListSize).add("0");
         HabitList.get(HabitListSize).add("0");
-        System.out.println("Через сколько дней ваша привычка будет считаться выполненной?");
-        int select1 = General.SelectMenu(2147483640);
-        String scanResult2 = Integer.toString(select1);
-        General.HabitList.get(0).add(scanResult2);
-        General.HabitList.get(0).add(Integer.toString(General.NewDate));
         FileWorker.SaveAllInFiles();
         System.out.println("\nПривычка '" + HabitList.get(HabitListSize).get(0) + "' успешно создана.");
         Menu1();
@@ -145,16 +139,14 @@ public class General {
         String HabitName = HabitList.get(select1).get(0);
         String HabitCompleteDays = HabitList.get(select1).get(1);
         String HabitMissedDays = HabitList.get(select1).get(2);
-        String NumberOfDays = HabitList.get(select1).get(3);
         ArchiveHabitList.add(new ArrayList<>());
         ArchiveHabitList.get(ArchiveHabitList.size() - 1).add(HabitName);
         ArchiveHabitList.get(ArchiveHabitList.size() - 1).add(HabitCompleteDays);
         ArchiveHabitList.get(ArchiveHabitList.size() - 1).add(HabitMissedDays);
-        ArchiveHabitList.get(ArchiveHabitList.size() - 1).add(NumberOfDays);
         HabitList.remove(select1);
         System.out.println("\nПривычка '" + ArchiveHabitList.get(ArchiveHabitList.size() - 1).get(0) + "' успешно перенесена в архив.");
         FileWorker.SaveAllInFiles();
-        FileWorker.IsArchiveHabitListFileEmpty();
+        FileWorker.IsArchiveHabittListFileEmpty();
         Menu1();
     }
 
@@ -166,17 +158,14 @@ public class General {
         String ArchiveHabitName = ArchiveHabitList.get(select1).get(0);
         String ArchiveHabitCompleteDays = ArchiveHabitList.get(select1).get(1);
         String ArchiveHabitMissedDays = ArchiveHabitList.get(select1).get(2);
-        String ArchiveNumberOfDays = ArchiveHabitList.get(select1).get(3);
         HabitList.add(new ArrayList<>());
         HabitList.get(HabitList.size() - 1).add(ArchiveHabitName);
         HabitList.get(HabitList.size() - 1).add(ArchiveHabitCompleteDays);
         HabitList.get(HabitList.size() - 1).add(ArchiveHabitMissedDays);
-        HabitList.get(HabitList.size() - 1).add(ArchiveNumberOfDays);
-        HabitList.get(HabitList.size() - 1).add(Integer.toString(NewDate));
         ArchiveHabitList.remove(select1);
         System.out.println("\nПривычка '" + HabitList.get(HabitList.size() - 1).get(0) + "' успешно восстановлена из архива.");
         FileWorker.SaveAllInFiles();
-        FileWorker.IsArchiveHabitListFileEmpty();
+        FileWorker.IsArchiveHabittListFileEmpty();
         Menu1();
     }
 
@@ -207,9 +196,8 @@ public class General {
         System.out.println("\nСтатистика ваших привычек:");
         for (int i1 = 0; i1 < HabitList.size(); i1++) {
             int i2 = i1 + 1;
-
             int HabitAllDays = Integer.parseInt(HabitList.get(i1).get(1)) + Integer.parseInt(HabitList.get(i1).get(2));
-            System.out.println( i2 + " - " + HabitList.get(i1).get(0) + " | Всего дней: " + HabitAllDays + " / " + HabitList.get(i1).get(3) + " | Выполнено дней: " + HabitList.get(i1).get(1) +
+            System.out.println( i2 + " - " + HabitList.get(i1).get(0) + " | Всего дней: " + HabitAllDays + " | Выполнено дней: " + HabitList.get(i1).get(1) +
                     " | Пропущено дней: " + HabitList.get(i1).get(2));
         }
     }
@@ -220,7 +208,7 @@ public class General {
         for (int i1 = 0; i1 < ArchiveHabitList.size(); i1++) {
             int i2 = i1 + 1;
             int ArchiveHabitAllDays = Integer.parseInt(ArchiveHabitList.get(i1).get(1)) + Integer.parseInt(ArchiveHabitList.get(i1).get(2));
-            System.out.println( i2 + " - " + ArchiveHabitList.get(i1).get(0) + " | Всего дней: " + ArchiveHabitAllDays + " / " + ArchiveHabitList.get(i1).get(3) +  " | Выполнено дней: " + ArchiveHabitList.get(i1).get(1) +
+            System.out.println( i2 + " - " + ArchiveHabitList.get(i1).get(0) + " | Всего дней: " + ArchiveHabitAllDays + " | Выполнено дней: " + ArchiveHabitList.get(i1).get(1) +
                     " | Пропущено дней: " + ArchiveHabitList.get(i1).get(2));
         }
     }
@@ -248,7 +236,6 @@ public class General {
     }
 
 
-
     public static int SelectMenu (int r) { // Complete
         boolean CorrectValue;
         int result = 0;
@@ -274,4 +261,4 @@ public class General {
 
 
 // Попробовать реализовать чтобы программа работала с календарём!!!
-// 0 - имя, 1 - выполненные дни, 2 - пропущенные дни, 3 - количество дней до окончания, 4 - Последне выполнение.
+
